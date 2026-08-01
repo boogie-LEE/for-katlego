@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Katlego 💕 From Thembi</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- ==================== OPENING ENVELOPE SCREEN ==================== -->
+    <div class="opening-screen" id="openingScreen">
+        <div class="opening-bg-hearts" id="openingBgHearts"></div>
+        <div class="opening-container">
+            <h1 class="opening-title">A Little Something For You...</h1>
+            <p class="opening-subtitle">Made with love by Thembi 💕</p>
+
+            <div class="big-envelope" id="bigEnvelope">
+                <div class="big-envelope-back"></div>
+                <div class="big-envelope-letter" id="envelopeLetter">
+                    <div class="letter-inside">
+                        <p class="letter-inside-title">💌</p>
+                        <p class="letter-inside-name">Katlego</p>
+                        <p class="letter-inside-text">Click me to open</p>
+                    </div>
+                </div>
+                <div class="big-envelope-front"></div>
+                <div class="big-envelope-flap" id="envelopeFlap"></div>
+                <div class="envelope-heart-seal">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+
+            <p class="opening-hint" id="openingHint">👆 Click the envelope</p>
+        </div>
+    </div>
+
+    <!-- ==================== QUESTIONS MODAL ==================== -->
+    <div class="questions-modal" id="questionsModal">
+        <div class="questions-bg-hearts" id="questionsBgHearts"></div>
+        <div class="question-container">
+            <div class="question-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="question-number" id="questionNumber">Question 1 of 5</div>
+            <h2 class="question-text" id="questionText">Do you love Thembi?</h2>
+            <div class="question-buttons">
+                <button class="yes-btn" id="yesBtn">Yes 💕</button>
+                <button class="no-btn" id="noBtn">No</button>
+            </div>
+            <p class="question-hint" id="questionHint">💡 Hint: There's only one right answer 😉</p>
+        </div>
+    </div>
+
+    <!-- ==================== FINAL CELEBRATION ==================== -->
+    <div class="celebration-screen" id="celebrationScreen">
+        <div class="confetti" id="confetti"></div>
+        <div class="celebration-content">
+            <div class="celebration-heart">💖</div>
+            <h1 class="celebration-title">I Knew It!</h1>
+            <p class="celebration-text">I love you too Katlego ❤️</p>
+            <p class="celebration-subtext">Now let me show you why...</p>
+            <button class="enter-btn" id="enterBtn">
+                <span>Enter Our World</span>
+                <i class="fas fa-heart"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== MAIN CONTENT (hidden until questions complete) ==================== -->
+    <div class="main-content" id="mainContent">
+
+        <!-- Floating Hearts Background -->
+        <div class="floating-hearts" id="floatingHearts"></div>
+
+        <!-- Navigation -->
+        <nav class="navbar" id="navbar">
+            <div class="nav-logo">
+                <i class="fas fa-heart heartbeat"></i>
+                <span>T & K</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#timeline">Our Story</a></li>
+                <li><a href="#gallery">Memories</a></li>
+                <li><a href="#letters">Letters</a></li>
+                <li><a href="#reasons">Why You</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#timeline">Our Story</a></li>
+                <li><a href="#gallery">Memories</a></li>
+                <li><a href="#letters">Letters</a></li>
+                <li><a href="#reasons">Why You</a></li>
+            </ul>
+        </div>
+
+        <!-- HERO SECTION -->
+        <section id="home" class="hero">
+            <div class="hero-overlay"></div>
+            <div class="particles" id="particles"></div>
+            <div class="hero-content">
+                <div class="hero-text animate-on-scroll">
+                    <p class="hero-subtitle">To the girl who slid into my DMs first 😏</p>
+                    <h1 class="hero-title">
+                        <span class="line1">Katlego,</span>
+                        <span class="line2">This Is Us</span>
+                        <span class="heart-icon">💕</span>
+                    </h1>
+                    <p class="hero-description">
+                        You acted all nonchalant, but we both know the truth —
+                        <span class="highlight">you wanted me bad</span> 😌
+                        And I'm the luckiest man because of it. This is my
+                        appreciation for you, baby.
+                    </p>
+                    <a href="#timeline" class="cta-button">
+                        <span>Explore Our Journey</span>
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
+                </div>
+                <div class="hero-image-frame animate-on-scroll">
+                    <div class="rotating-border"></div>
+                    <div class="hero-couple-photo">
+                        <img src="images/photo1.jpg" alt="Us">
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <p>Scroll Down</p>
+            </div>
+        </section>
+
+        <!-- TIMELINE SECTION -->
+        <section id="timeline" class="timeline-section">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">📖 Our Journey</span>
+                <h2 class="section-title">How Our Story Started</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="timeline">
+                <!-- December DM -->
+                <div class="timeline-item left animate-on-scroll">
+                    <div class="timeline-dot">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            December 2024
+                        </div>
+                        <h3>The Famous DM 😌</h3>
+                        <p>You slid into my DMs first — remember that? And then you had the audacity to act all nonchalant like you weren't the one who started it. But baby, I saw right through you. You wanted me and you wanted me bad. And honestly? Best decision you ever made.</p>
+                    </div>
+                </div>
+
+                <!-- Anniversary -->
+                <div class="timeline-item right animate-on-scroll">
+                    <div class="timeline-dot">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            March 3, 2025
+                        </div>
+                        <h3>The Day You Became Mine 💍</h3>
+                        <p>03.03.2025 — a date I'll never forget. The day you officially became mine and I became yours. Everything changed for the better from that moment. You gave me a reason to smile every single day.</p>
+                        <div class="timeline-image">
+                            <img src="images/photo3.jpg" alt="Us together">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adventures -->
+                <div class="timeline-item left animate-on-scroll">
+                    <div class="timeline-dot">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            Every Adventure
+                        </div>
+                        <h3>Our Little Escapes 🛍️</h3>
+                        <p>Whether we're shopping, taking mirror pics, riding escalators or just cruising with the sunroof open — every moment with you turns into a memory I want to hold onto forever.</p>
+                        <div class="timeline-image">
+                            <img src="images/photo4.jpg" alt="Escalator moment">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Present -->
+                <div class="timeline-item right animate-on-scroll">
+                    <div class="timeline-dot">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            Today & Forever
+                        </div>
+                        <h3>Still Falling For You 🥰</h3>
+                        <p>Every day I discover a new reason to love you Katlego. You're my peace, my best friend, my partner in crime. Here's to us — Thembi & Katlego, forever.</p>
+                        <div class="timeline-image">
+                            <img src="images/photo7.jpg" alt="Today">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHOTO GALLERY -->
+        <section id="gallery" class="gallery-section">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">📸 Photo Album</span>
+                <h2 class="section-title">Our Beautiful Memories</h2>
+                <div class="title-underline"></div>
+                <p class="section-subtitle">Click any photo to view full size</p>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item">
+                    <div class="gallery-card">
+                        <img src="images/photo1.jpg" alt="Memory" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-expand"></i>
+                                <h4>Matching Hoodies</h4>
+                                <p>Our vibe 💚💙</p>
+                            </div>
+                        </div>
+                        <div class="gallery-heart"><i class="fas fa-heart"></i></div>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-card">
+                        <img src="images/photo2.jpg" alt="Memory" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-expand"></i>
+                                <h4>My Beautiful Girl</h4>
+                                <p>That smile though ✨</p>
+                            </div>
+                        </div>
+                        <div class="gallery-heart"><i class="fas fa-heart"></i></div>
+                    </div>
+                </div>
+
+                <div class="gallery-item tall">
+                    <div class="gallery-card">
+                        <img src="images/photo3.jpg" alt="Memory" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-expand"></i>
+                                <h4>Kiss on the Cheek</h4>
+                                <p>My favorite kind 💋</p>
+                            </div>
+                        </div>
+                        <div class="gallery-heart"><i class="fas fa-heart"></i></div>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-card">
+                        <img src="images/photo4.jpg" alt="Memory" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-expand"></i>
+                                <h4>Escalator Days</h4>
+                                <p>Little moments 👟</p>
+                            </div>
+                        </div>
+                        <div class="gallery-heart"><i class="fas fa-heart"></i></div>
+                    </div>
+                </div>
+
+                <div class="gallery-item wide">
+                    <div class="gallery-card">
+                        <img src="images/photo5.jpg" alt="Memory" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-expand"></i>
+                                <h4>Sunroof Vibes</h4>
+                                <p>Tongue out crew 😛</p>
+                            </div>
+                        </div>
+                        <div class="gallery-heart"><i class="fas fa-heart"></i></div>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-card">
+                        <img src="images/photo6.jpg" alt="Memory" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-expand"></i>
+                                <h4>Natural Beauty</h4>
+                                <p>Effortlessly gorgeous 🌟</p>
+                            </div>
+                        </div>
+                        <div class="gallery-heart"><i class="fas fa-heart"></i></div>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-card">
+                        <img src="images/photo7.jpg" alt="Memory" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-expand"></i>
+                                <h4>Golden Hour</h4>
+                                <p>You glow different 💛</p>
+                            </div>
+                        </div>
+                        <div class="gallery-heart"><i class="fas fa-heart"></i></div>
+                    </div>
+                </div>
+
+                <div class="gallery-item tall">
+                    <div class="gallery-card">
+                        <img src="images/photo8.jpg" alt="Memory" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-expand"></i>
+                                <h4>Us Against The World</h4>
+                                <p>Middle fingers up 🖕</p>
+                            </div>
+                        </div>
+                        <div class="gallery-heart"><i class="fas fa-heart"></i></div>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-card">
+                        <img src="images/photo9.jpg" alt="Memory" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-expand"></i>
+                                <h4>Just Us</h4>
+                                <p>My favorite person 💕</p>
+                            </div>
+                        </div>
+                        <div class="gallery-heart"><i class="fas fa-heart"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox">
+            <button class="lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+            <button class="lightbox-nav lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+            <div class="lightbox-content">
+                <img src="" alt="" id="lightboxImage">
+                <div class="lightbox-caption" id="lightboxCaption"></div>
+            </div>
+        </div>
+
+        <!-- LOVE LETTERS -->
+        <section id="letters" class="letters-section">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">💌 Love Letters</span>
+                <h2 class="section-title">Words From My Heart</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="letters-container">
+                <div class="letter-envelope animate-on-scroll" data-letter="1">
+                    <div class="envelope">
+                        <div class="envelope-flap"></div>
+                        <div class="envelope-body">
+                            <div class="envelope-front">
+                                <p class="envelope-label">💌</p>
+                                <p class="envelope-title">Letter #1</p>
+                                <p class="envelope-date">Why I Love You</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="letter-paper">
+                        <div class="letter-content">
+                            <div class="letter-decoration">✦ ✦ ✦</div>
+                            <h3>My Dearest Katlego,</h3>
+                            <p>From the moment you slid into my DMs in December, I knew something in my life was about to change. And baby, you changed everything. You walked into my world and painted it with colors I never knew existed.</p>
+                            <p>I love the way you laugh, the way you look at me when you think I'm not watching, the way you make even the most ordinary days feel like something special. You've taught me what love actually feels like — not the movies version, but the real, deep, "I want you forever" kind.</p>
+                            <p>Thank you for choosing me, Katlego. Thank you for being nonchalant that one time so I could chase you properly. Thank you for being the most beautiful part of my life.</p>
+                            <p class="letter-closing">
+                                Forever yours,<br>
+                                <span class="letter-signature">Thembi ❤️</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-envelope animate-on-scroll" data-letter="2">
+                    <div class="envelope">
+                        <div class="envelope-flap"></div>
+                        <div class="envelope-body">
+                            <div class="envelope-front">
+                                <p class="envelope-label">💌</p>
+                                <p class="envelope-title">Letter #2</p>
+                                <p class="envelope-date">My Promise</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="letter-paper">
+                        <div class="letter-content">
+                            <div class="letter-decoration">✦ ✦ ✦</div>
+                            <h3>Baby Girl,</h3>
+                            <p>I want to make you a promise today — not because I have to, but because my heart demands it. I promise to be your safe place when the world feels too heavy. I promise to celebrate your wins as if they were my own.</p>
+                            <p>I promise to hold you through every storm and dance with you in every rainbow. I promise to never stop trying to make you smile, to never take you for granted, and to always remind you how special you are.</p>
+                            <p>You deserve the entire world, Katlego. And while I might not have the whole world to give you yet, I promise to give you my world — my heart, my time, my everything.</p>
+                            <p class="letter-closing">
+                                With all my heart,<br>
+                                <span class="letter-signature">Thembi ❤️</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-envelope animate-on-scroll" data-letter="3">
+                    <div class="envelope">
+                        <div class="envelope-flap"></div>
+                        <div class="envelope-body">
+                            <div class="envelope-front">
+                                <p class="envelope-label">💌</p>
+                                <p class="envelope-title">Letter #3</p>
+                                <p class="envelope-date">What You Mean</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="letter-paper">
+                        <div class="letter-content">
+                            <div class="letter-decoration">✦ ✦ ✦</div>
+                            <h3>Hey Beautiful,</h3>
+                            <p>Do you know what you mean to me? You're the first thought I have when I wake up and the last smile I carry before I sleep. You're the reason I believe in love again.</p>
+                            <p>Before you, I didn't think someone could make my heart feel this full. But then you came along, acting all nonchalant, and made me fall harder than I ever thought I could. You're my home, my peace, my greatest blessing.</p>
+                            <p>No matter where life takes us, you will always be my person. I appreciate you more than words could ever express — but I'll never stop trying to show you.</p>
+                            <p class="letter-closing">
+                                I love you endlessly,<br>
+                                <span class="letter-signature">Your Thembi ❤️</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10 REASONS -->
+        <section id="reasons" class="reasons-section">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">💝 Appreciation</span>
+                <h2 class="section-title">10 Reasons I Love You</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="reasons-list">
+                <div class="reason-item animate-on-scroll">
+                    <div class="reason-num">01</div>
+                    <div class="reason-body">
+                        <h3>Your Smile Katlego 😊</h3>
+                        <p>Your smile has this crazy power over me — it can turn the worst day into the best one in seconds. When you smile, everything around me stops making sense in the best way possible. I've caught myself doing random things during the day just remembering how you smiled at me the last time we were together. That smile is my safe place, my medicine, my favorite view in the entire world.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item animate-on-scroll">
+                    <div class="reason-num">02</div>
+                    <div class="reason-body">
+                        <h3>The Way You Slid Into My DMs 😌</h3>
+                        <p>Let's talk about the funniest part of our story — YOU messaged me first in December. And then, plot twist, you tried to act all nonchalant like you weren't the one who initiated this whole thing. Baby, you wanted me and you wanted me bad, and I love you even more for having the guts to shoot your shot. If you hadn't sent that DM, I would've missed out on the greatest love of my life. So thank you for being bold when it counted.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item animate-on-scroll">
+                    <div class="reason-num">03</div>
+                    <div class="reason-body">
+                        <h3>Your Heart 💗</h3>
+                        <p>You have one of the purest, most beautiful hearts I've ever encountered. The way you care about people, the way you love, the way you show up — it's rare and I don't take it for granted. You love with your whole chest and that's something the world doesn't deserve but somehow I got lucky enough to receive. Your kindness is your superpower and I'm forever amazed by how deeply you feel things.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item animate-on-scroll">
+                    <div class="reason-num">04</div>
+                    <div class="reason-body">
+                        <h3>Your Beauty 🌹</h3>
+                        <p>Katlego, you are stunning inside and out. Whether you're rocking your natural afro, colorful braids, or your white hair looking like an actual goddess — you make my jaw drop every single time. And the crazy thing is you don't even try; you're just naturally that beautiful. But it's not just the outside — your soul is the most beautiful part about you, and that's what I fell in love with first.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item animate-on-scroll">
+                    <div class="reason-num">05</div>
+                    <div class="reason-body">
+                        <h3>Our Vibe Together 💚💙</h3>
+                        <p>The way we just click — matching hoodies without planning it, taking mirror pics, being goofy in the car with our tongues out, throwing up peace signs and middle fingers together. We don't just love each other, we ENJOY each other. Not many couples have that. We're best friends first and lovers second, and that's a combination that makes what we have unbreakable. Nobody makes me laugh or feel as comfortable as you do.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item animate-on-scroll">
+                    <div class="reason-num">06</div>
+                    <div class="reason-body">
+                        <h3>Your Strength 💪</h3>
+                        <p>You handle life with a kind of grace that inspires me every single day. Even when things get hard, you find a way to push through. You've dealt with things that would break other people and yet here you are — still soft, still loving, still choosing joy. That takes a special kind of strength and I want you to know I see it. You're stronger than you give yourself credit for, and I'm always here to remind you when you forget.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item animate-on-scroll">
+                    <div class="reason-num">07</div>
+                    <div class="reason-body">
+                        <h3>The Little Things You Do 🥰</h3>
+                        <p>It's the small things that make me love you more each day. The way you check up on me even when you're busy, the way you remember tiny details I mentioned in passing, the way you know exactly what I need without me having to say it. These small acts add up to something huge. Love isn't always grand gestures — sometimes it's the quiet, consistent, everyday choices to show up. And you show up every single time.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item animate-on-scroll">
+                    <div class="reason-num">08</div>
+                    <div class="reason-body">
+                        <h3>How You Make Me Feel 💫</h3>
+                        <p>With you, I feel seen. I feel understood. I feel like the best version of myself. You've made me realize that I deserve love — real, deep, uncomplicated love. Before you, I don't think I fully understood what it meant to be someone's peace, but now I get it because you are mine. When I'm with you, everything just makes sense. You feel like home in a way nothing else ever has.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item animate-on-scroll">
+                    <div class="reason-num">09</div>
+                    <div class="reason-body">
+                        <h3>Our Future 🔮</h3>
+                        <p>Every time I think about the future, I see you in it. I see us traveling, building, growing, laughing, arguing over stupid stuff and making up 5 minutes later. I see everything with you and only you. You're not just someone I'm dating — you're someone I'm building with. And that vision, that dream of our future, gives me a reason to work harder and be better every single day. You are my forever plan Katlego.</p>
+                    </div>
+                </div>
+
+                <div class="reason-item animate-on-scroll">
+                    <div class="reason-num">10</div>
+                    <div class="reason-body">
+                        <h3>Because You're YOU ✨</h3>
+                        <p>At the end of the day, the biggest reason I love you is because you're you. You don't have to try, you don't have to change, you don't have to be anyone else. Just being Katlego is more than enough — it's everything. I fell in love with your imperfections, your quirks, your laugh, your mood swings, the way you say my name. Every single piece of you. You are my person, my baby, my forever. And I thank God every day that you slid into those DMs 💕</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Love Counter -->
+            <div class="love-counter animate-on-scroll">
+                <h3>We've Been Officially In Love For</h3>
+                <div class="counter-grid">
+                    <div class="counter-item">
+                        <span class="counter-number" id="counterDays">0</span>
+                        <span class="counter-label">Days</span>
+                    </div>
+                    <div class="counter-item">
+                        <span class="counter-number" id="counterHours">0</span>
+                        <span class="counter-label">Hours</span>
+                    </div>
+                    <div class="counter-item">
+                        <span class="counter-number" id="counterMinutes">0</span>
+                        <span class="counter-label">Minutes</span>
+                    </div>
+                    <div class="counter-item">
+                        <span class="counter-number" id="counterSeconds">0</span>
+                        <span class="counter-label">Seconds</span>
+                    </div>
+                </div>
+                <p class="counter-since">Since 03 March 2025 💕</p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-hearts">
+                <span>💕</span><span>💕</span><span>💕</span>
+            </div>
+            <h2 class="footer-title">I Love You Katlego</h2>
+            <p class="footer-subtitle">Today, Tomorrow, and Forever</p>
+            <div class="footer-quote">
+                <p>"In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."</p>
+                <span>— For you, my baby ❤️</span>
+            </div>
+            <p class="footer-made">Made with all my love ❤️<br>— Thembi</p>
+        </footer>
+
+        <!-- Music Toggle -->
+        <button class="music-toggle" id="musicToggle" title="Butterflies - Brent Faiyaz">
+            <i class="fas fa-music"></i>
+        </button>
+
+        <audio id="bgMusic" loop>
+            <source src="music/butterflies.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
