@@ -1,5 +1,79 @@
 document.addEventListener('DOMContentLoaded', () => {
+function getMusic() {
+    return document.getElementById('bgMusic');
+}
 
+function getMusicBtn() {
+    return document.getElementById('musicToggle');
+}
+
+function startMusic() {
+    const music = getMusic();
+    const btn = getMusicBtn();
+    if (!music) {
+        console.error('No #bgMusic element found');
+        return;
+    }
+
+    music.volume = 0.5;
+
+    // Important: load again in case path was slow
+    music.load();
+
+    const playPromise = music.play();
+
+    if (playPromise !== undefined) {
+        playPromise
+            .then(() => {
+                console.log('Music playing ✅');
+                if (btn) {
+                    btn.classList.add('playing');
+                    const icon = btn.querySelector('i');
+                    if (icon) icon.className = 'fas fa-music';
+                }
+            })
+            .catch((err) => {
+                console.error('Music play blocked/failed:', err);
+                // Show button so she can tap it
+                if (btn) {
+                    btn.style.display = 'flex';
+                    btn.classList.add('needs-tap');
+                }
+                alert('Tap the 🎵 button to play Butterflies 💕');
+            });
+    }
+}
+
+function setupMusicToggle() {
+    const music = getMusic();
+    const btn = getMusicBtn();
+    if (!music || !btn) return;
+
+    btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        try {
+            if (music.paused) {
+                music.volume = 0.5;
+                await music.play();
+                btn.classList.add('playing');
+                const icon = btn.querySelector('i');
+                if (icon) icon.className = 'fas fa-music';
+                console.log('Music resumed ✅');
+            } else {
+                music.pause();
+                btn.classList.remove('playing');
+                const icon = btn.querySelector('i');
+                if (icon) icon.className = 'fas fa-volume-mute';
+                console.log('Music paused');
+            }
+        } catch (err) {
+            console.error('Toggle play failed:', err);
+            alert('Could not play music. Check music/butterflies.mp3 on the site.');
+        }
+    });
+}
     // ============================================
     // OPENING ENVELOPE ANIMATION
     // ============================================
@@ -180,6 +254,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Enter main content
     document.getElementById('enterBtn').addEventListener('click', () => {
+    celebrationScreen.classList.remove('active');
+
+    setTimeout(() => {
+        document.getElementById('mainContent').classList.add('active');
+        initMainContent();
+        startMusic(); // start song after her click
+    }, 800);
+});
         celebrationScreen.classList.remove('active');
         setTimeout(() => {
             document.getElementById('mainContent').classList.add('active');
