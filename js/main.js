@@ -1,9 +1,26 @@
-document.addEventListener('DOMContentLoaded', () => {
-
-    const openingScreen = document.getElementById('openingScreen');
+// Global openEnvelope function so HTML inline onclick ALWAYS works
+window.openEnvelope = function() {
     const bigEnvelope = document.getElementById('bigEnvelope');
-    const openingBgHearts = document.getElementById('openingBgHearts');
+    const openingScreen = document.getElementById('openingScreen');
     const questionsModal = document.getElementById('questionsModal');
+    const openingHint = document.getElementById('openingHint');
+
+    if (!bigEnvelope || bigEnvelope.classList.contains('opened')) return;
+
+    bigEnvelope.classList.add('opened');
+    if (openingHint) openingHint.style.opacity = '0';
+
+    setTimeout(() => {
+        if (openingScreen) openingScreen.classList.add('hidden');
+        if (questionsModal) questionsModal.classList.add('active');
+        if (typeof window.startQuestions === 'function') window.startQuestions();
+    }, 2500);
+};
+
+// Immediate execution guard (bypasses DOMContentLoaded delay issues)
+function initApp() {
+
+    const openingBgHearts = document.getElementById('openingBgHearts');
     const questionsBgHearts = document.getElementById('questionsBgHearts');
 
     function addBackgroundHearts(container) {
@@ -24,31 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
     addBackgroundHearts(openingBgHearts);
     addBackgroundHearts(questionsBgHearts);
 
-    // ==========================================
-    // FIXED ENVELOPE LOGIC (Mobile & Desktop)
-    // ==========================================
-    if (bigEnvelope) {
-        const handleEnvelopeOpen = (e) => {
-            // Prevent double-firing if clicked/tapped twice
-            if (bigEnvelope.classList.contains('opened')) return;
-            
-            bigEnvelope.classList.add('opened');
-            
-            const hint = document.getElementById('openingHint');
-            if (hint) hint.style.opacity = '0';
-            
-            setTimeout(() => {
-                if (openingScreen) openingScreen.classList.add('hidden');
-                if (questionsModal) questionsModal.classList.add('active');
-                startQuestions();
-            }, 2500);
-        };
-
-        // Attach both click (desktop) and touchstart (mobile Safari fix)
-        bigEnvelope.addEventListener('click', handleEnvelopeOpen);
-        bigEnvelope.addEventListener('touchstart', handleEnvelopeOpen, { passive: true });
-    }
-
     // QUESTIONS
     const questions = [
         { text: "Do you love Thembi? 💕", yes: "Yes, always 💖", no: "No" },
@@ -67,9 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const questionHint = document.getElementById('questionHint');
     const celebrationScreen = document.getElementById('celebrationScreen');
 
-    function startQuestions() { 
+    window.startQuestions = function() { 
         if (questionText) loadQuestion(); 
-    }
+    };
     
     function loadQuestion() {
         const q = questions[currentQuestion];
@@ -118,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showCelebration() {
+        const questionsModal = document.getElementById('questionsModal');
         if (questionsModal) questionsModal.classList.remove('active');
         setTimeout(() => {
             if (celebrationScreen) celebrationScreen.classList.add('active');
@@ -146,11 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const enterBtn = document.getElementById('enterBtn');
     if (enterBtn) {
         enterBtn.addEventListener('click', () => {
-            celebrationScreen.classList.remove('active');
+            if (celebrationScreen) celebrationScreen.classList.remove('active');
             setTimeout(() => {
                 document.getElementById('mainContent').classList.add('active');
                 initMainContent();
-                // Start music after user interaction
                 const music = document.getElementById('bgMusic');
                 if (music) {
                     music.volume = 0.5;
@@ -180,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setInterval(createFloatingHeart, 2000);
         }
 
-        // FLOATING LOVE NOTES - taps to dismiss
+        // FLOATING LOVE NOTES
         const loveNotes = [
             "You're my favorite person 💕",
             "I love you Katlego 🥰",
@@ -205,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 note.className = 'floating-note';
                 note.textContent = loveNotes[Math.floor(Math.random() * loveNotes.length)];
 
-                // Random position (not covering nav/footer edges)
                 const maxX = window.innerWidth - 280;
                 const maxY = window.innerHeight - 200;
                 const x = Math.max(20, Math.random() * maxX);
@@ -213,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 note.style.left = x + 'px';
                 note.style.top = y + 'px';
 
-                // Random slight rotation
                 const rot = (Math.random() * 10 - 5);
                 note.style.transform = `rotate(${rot}deg)`;
 
@@ -227,7 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 notesContainer.appendChild(note);
 
-                // Auto remove after 10 seconds
                 setTimeout(() => {
                     if (note.parentNode) {
                         note.classList.add('pop');
@@ -476,4 +465,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log('%c❤️ Made with love by Thembi for Katlego ❤️', 'color: #e63e6d; font-size: 20px; font-weight: bold;');
     }
-});
+}
+
+// Run immediately if DOM is ready, otherwise wait
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
