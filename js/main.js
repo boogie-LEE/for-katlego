@@ -17,7 +17,7 @@ window.openEnvelope = function() {
     }, 2500);
 };
 
-// Immediate execution guard (bypasses DOMContentLoaded delay issues)
+// Immediate execution guard
 function initApp() {
 
     const openingBgHearts = document.getElementById('openingBgHearts');
@@ -377,11 +377,15 @@ function initApp() {
             });
         });
 
-        // Love counter (since)
-        const startDate = new Date('2025-03-03T00:00:00');
+        // ==========================================
+        // DYNAMIC COUNTERS LOGIC
+        // ==========================================
+        const relationshipStartDate = new Date('2025-03-03T00:00:00');
+        
+        // 1. LOVE COUNTER (Since start)
         function updateCounter() {
             const now = new Date();
-            const diff = now - startDate;
+            const diff = now - relationshipStartDate;
             const days = Math.floor(diff / (1000*60*60*24));
             const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
             const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
@@ -400,26 +404,37 @@ function initApp() {
         updateCounter();
         setInterval(updateCounter, 1000);
 
-        // NEXT ANNIVERSARY COUNTDOWN (03 March 2026)
-        const nextAnniversary = new Date('2026-03-03T00:00:00');
+        // 2. NEXT ANNIVERSARY COUNTDOWN (Dynamic Rollover)
         function updateCountdown() {
             const now = new Date();
+            let targetYear = now.getFullYear();
+            
+            // Month is 0-indexed. 2 = March.
+            let nextAnniversary = new Date(targetYear, 2, 3, 0, 0, 0);
+            
+            // If March 3rd of this year has already passed, count down to next year
+            if (now.getTime() > nextAnniversary.getTime()) {
+                targetYear++;
+                nextAnniversary.setFullYear(targetYear);
+            }
+            
             const diff = nextAnniversary - now;
             
             const cdDays = document.getElementById('cdDays');
             const cdHours = document.getElementById('cdHours');
             const cdMins = document.getElementById('cdMinutes');
             const cdSecs = document.getElementById('cdSeconds');
+            const annivSubtitle = document.getElementById('annivSubtitle');
             
             if (!cdDays) return;
 
-            if (diff <= 0) {
-                cdDays.textContent = '0';
-                cdHours.textContent = '0';
-                cdMins.textContent = '0';
-                cdSecs.textContent = '0';
-                return;
+            // Dynamically update text "03 March [Year] — Our [X] Year(s) 💕"
+            if (annivSubtitle) {
+                let yearsTogether = targetYear - relationshipStartDate.getFullYear();
+                let yearText = yearsTogether === 1 ? 'Year' : 'Years';
+                annivSubtitle.textContent = `03 March ${targetYear} — Our ${yearsTogether} ${yearText} 💕`;
             }
+
             const days = Math.floor(diff / (1000*60*60*24));
             const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
             const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
