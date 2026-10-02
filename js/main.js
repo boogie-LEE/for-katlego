@@ -1,91 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-function getMusic() {
-    return document.getElementById('bgMusic');
-}
 
-function getMusicBtn() {
-    return document.getElementById('musicToggle');
-}
-
-function startMusic() {
-    const music = getMusic();
-    const btn = getMusicBtn();
-    if (!music) {
-        console.error('No #bgMusic element found');
-        return;
-    }
-
-    music.volume = 0.5;
-
-    // Important: load again in case path was slow
-    music.load();
-
-    const playPromise = music.play();
-
-    if (playPromise !== undefined) {
-        playPromise
-            .then(() => {
-                console.log('Music playing ✅');
-                if (btn) {
-                    btn.classList.add('playing');
-                    const icon = btn.querySelector('i');
-                    if (icon) icon.className = 'fas fa-music';
-                }
-            })
-            .catch((err) => {
-                console.error('Music play blocked/failed:', err);
-                // Show button so she can tap it
-                if (btn) {
-                    btn.style.display = 'flex';
-                    btn.classList.add('needs-tap');
-                }
-                alert('Tap the 🎵 button to play Butterflies 💕');
-            });
-    }
-}
-
-function setupMusicToggle() {
-    const music = getMusic();
-    const btn = getMusicBtn();
-    if (!music || !btn) return;
-
-    btn.addEventListener('click', async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        try {
-            if (music.paused) {
-                music.volume = 0.5;
-                await music.play();
-                btn.classList.add('playing');
-                const icon = btn.querySelector('i');
-                if (icon) icon.className = 'fas fa-music';
-                console.log('Music resumed ✅');
-            } else {
-                music.pause();
-                btn.classList.remove('playing');
-                const icon = btn.querySelector('i');
-                if (icon) icon.className = 'fas fa-volume-mute';
-                console.log('Music paused');
-            }
-        } catch (err) {
-            console.error('Toggle play failed:', err);
-            alert('Could not play music. Check music/butterflies.mp3 on the site.');
-        }
-    });
-}
-    // ============================================
-    // OPENING ENVELOPE ANIMATION
-    // ============================================
     const openingScreen = document.getElementById('openingScreen');
     const bigEnvelope = document.getElementById('bigEnvelope');
     const openingBgHearts = document.getElementById('openingBgHearts');
     const questionsModal = document.getElementById('questionsModal');
     const questionsBgHearts = document.getElementById('questionsBgHearts');
 
-    // Add floating hearts to opening screen
     function addBackgroundHearts(container) {
-        const hearts = ['💕', '💖', '💗', '💓', '❤️', '💝', '💘'];
+        const hearts = ['💕','💖','💗','💓','❤️','💝','💘'];
         for (let i = 0; i < 20; i++) {
             const heart = document.createElement('span');
             heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
@@ -100,12 +22,9 @@ function setupMusicToggle() {
     addBackgroundHearts(openingBgHearts);
     addBackgroundHearts(questionsBgHearts);
 
-    // Click envelope
     bigEnvelope.addEventListener('click', () => {
         bigEnvelope.classList.add('opened');
         document.getElementById('openingHint').style.opacity = '0';
-
-        // After envelope opens, go to questions
         setTimeout(() => {
             openingScreen.classList.add('hidden');
             questionsModal.classList.add('active');
@@ -113,36 +32,13 @@ function setupMusicToggle() {
         }, 2500);
     });
 
-
-    // ============================================
-    // LOVE QUESTIONS (No button runs away!)
-    // ============================================
+    // QUESTIONS
     const questions = [
-        {
-            text: "Do you love Thembi? 💕",
-            yes: "Yes, always 💖",
-            no: "No"
-        },
-        {
-            text: "Are you happy we started talking in December? 😌",
-            yes: "Best decision ever ✨",
-            no: "Nope"
-        },
-        {
-            text: "Do you admit you slid into MY DMs first? 😏",
-            yes: "Fine, yes 🙈",
-            no: "Never"
-        },
-        {
-            text: "Do you still get butterflies when you see me? 🦋",
-            yes: "Every time 🥰",
-            no: "No"
-        },
-        {
-            text: "Will you keep loving me forever? 💍",
-            yes: "Forever and always 💕",
-            no: "No"
-        }
+        { text: "Do you love Thembi? 💕", yes: "Yes, always 💖", no: "No" },
+        { text: "Are you happy we started talking in December? 😌", yes: "Best decision ever ✨", no: "Nope" },
+        { text: "Do you admit you slid into MY DMs first? 😏", yes: "Fine, yes 🙈", no: "Never" },
+        { text: "Do you still get butterflies when you see me? 🦋", yes: "Every time 🥰", no: "No" },
+        { text: "Will you keep loving me forever? 💍", yes: "Forever and always 💕", no: "No" }
     ];
 
     let currentQuestion = 0;
@@ -154,10 +50,7 @@ function setupMusicToggle() {
     const questionHint = document.getElementById('questionHint');
     const celebrationScreen = document.getElementById('celebrationScreen');
 
-    function startQuestions() {
-        loadQuestion();
-    }
-
+    function startQuestions() { loadQuestion(); }
     function loadQuestion() {
         const q = questions[currentQuestion];
         questionText.textContent = q.text;
@@ -165,47 +58,27 @@ function setupMusicToggle() {
         yesBtn.textContent = q.yes;
         noBtn.textContent = q.no;
         progressBar.style.width = ((currentQuestion + 1) / questions.length * 100) + '%';
-
-        // Reset no button position
         noBtn.style.position = 'static';
         noBtn.style.transform = 'none';
     }
 
-    // YES button - go to next question
     yesBtn.addEventListener('click', () => {
         currentQuestion++;
         if (currentQuestion < questions.length) {
-            // Add cute little animation
             questionText.style.opacity = '0';
-            setTimeout(() => {
-                loadQuestion();
-                questionText.style.opacity = '1';
-            }, 300);
+            setTimeout(() => { loadQuestion(); questionText.style.opacity = '1'; }, 300);
         } else {
-            // All questions answered - show celebration
             showCelebration();
         }
     });
 
-    // NO button - RUNS AWAY! (or shakes)
     noBtn.addEventListener('mouseenter', () => {
-        // Random position within the question container
-        const container = document.querySelector('.question-container');
-        const containerRect = container.getBoundingClientRect();
-        const btnRect = noBtn.getBoundingClientRect();
-
-        const maxX = containerRect.width - btnRect.width - 20;
-        const maxY = containerRect.height - btnRect.height - 20;
-
-        const randomX = Math.random() * maxX - maxX/2;
-        const randomY = Math.random() * 100 - 50;
-
+        const randomX = Math.random() * 300 - 150;
+        const randomY = Math.random() * 150 - 75;
         noBtn.style.position = 'relative';
         noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
         noBtn.style.transition = 'transform 0.3s ease';
     });
-
-    // Also on touch for mobile
     noBtn.addEventListener('touchstart', (e) => {
         e.preventDefault();
         const randomX = Math.random() * 200 - 100;
@@ -213,8 +86,6 @@ function setupMusicToggle() {
         noBtn.style.position = 'relative';
         noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
     });
-
-    // If somehow clicked, show funny message
     noBtn.addEventListener('click', (e) => {
         e.preventDefault();
         questionHint.textContent = "Nice try 😂 but that's not an option baby ❤️";
@@ -222,10 +93,6 @@ function setupMusicToggle() {
         questionHint.style.fontWeight = '600';
     });
 
-
-    // ============================================
-    // CELEBRATION SCREEN
-    // ============================================
     function showCelebration() {
         questionsModal.classList.remove('active');
         setTimeout(() => {
@@ -236,8 +103,7 @@ function setupMusicToggle() {
 
     function createConfetti() {
         const confettiContainer = document.getElementById('confetti');
-        const colors = ['#ff85a2', '#ffc1d4', '#ffe0eb', '#e63e6d', '#ffffff', '#f0c27f'];
-
+        const colors = ['#ff85a2','#ffc1d4','#ffe0eb','#e63e6d','#ffffff','#f0c27f'];
         for (let i = 0; i < 100; i++) {
             const piece = document.createElement('div');
             piece.className = 'confetti-piece';
@@ -252,38 +118,25 @@ function setupMusicToggle() {
         }
     }
 
-    // Enter main content
     document.getElementById('enterBtn').addEventListener('click', () => {
-    celebrationScreen.classList.remove('active');
-
-    setTimeout(() => {
-        document.getElementById('mainContent').classList.add('active');
-        initMainContent();
-        startMusic(); // start song after her click
-    }, 800);
-});
         celebrationScreen.classList.remove('active');
         setTimeout(() => {
             document.getElementById('mainContent').classList.add('active');
             initMainContent();
-            // Try to start music
+            // Start music after user interaction
             const music = document.getElementById('bgMusic');
-            music.volume = 0.4;
-            music.play().catch(() => console.log('Autoplay blocked'));
-            document.getElementById('musicToggle').classList.add('playing');
+            if (music) {
+                music.volume = 0.5;
+                music.play().catch(err => console.log('Music play blocked:', err));
+            }
         }, 800);
     });
 
-
-    // ============================================
-    // MAIN CONTENT INIT
-    // ============================================
     function initMainContent() {
 
-        // Floating Hearts
+        // Floating hearts background
         const floatingHearts = document.getElementById('floatingHearts');
         const heartEmojis = ['❤️','💕','💖','💗','💓','💘','💝','✨','🌸'];
-
         function createFloatingHeart() {
             const heart = document.createElement('span');
             heart.className = 'floating-heart';
@@ -296,6 +149,63 @@ function setupMusicToggle() {
         }
         for (let i = 0; i < 15; i++) setTimeout(createFloatingHeart, i * 500);
         setInterval(createFloatingHeart, 2000);
+
+        // FLOATING LOVE NOTES - taps to dismiss
+        const loveNotes = [
+            "You're my favorite person 💕",
+            "I love you Katlego 🥰",
+            "Thinking of you right now 💭",
+            "My butterfly 🦋",
+            "You = my peace 🌸",
+            "Still obsessed with you 😍",
+            "Best DM I ever got 😏",
+            "My forever 💍",
+            "I'd choose you again 💗",
+            "You're magic baby ✨",
+            "My safe place 🏠",
+            "The one 💘",
+            "Yours always 💌",
+            "My heart is yours 💝"
+        ];
+
+        const notesContainer = document.getElementById('floatingNotesContainer');
+
+        function spawnFloatingNote() {
+            const note = document.createElement('div');
+            note.className = 'floating-note';
+            note.textContent = loveNotes[Math.floor(Math.random() * loveNotes.length)];
+
+            // Random position (not covering nav/footer edges)
+            const maxX = window.innerWidth - 280;
+            const maxY = window.innerHeight - 200;
+            const x = Math.max(20, Math.random() * maxX);
+            const y = Math.max(100, Math.random() * maxY);
+            note.style.left = x + 'px';
+            note.style.top = y + 'px';
+
+            // Random slight rotation
+            const rot = (Math.random() * 10 - 5);
+            note.style.transform = `rotate(${rot}deg)`;
+
+            note.addEventListener('click', () => {
+                note.classList.add('pop');
+                setTimeout(() => note.remove(), 500);
+            });
+
+            notesContainer.appendChild(note);
+
+            // Auto remove after 10 seconds
+            setTimeout(() => {
+                if (note.parentNode) {
+                    note.classList.add('pop');
+                    setTimeout(() => note.remove(), 500);
+                }
+            }, 10000);
+        }
+
+        // Spawn first note after 3 seconds, then every 7 seconds
+        setTimeout(spawnFloatingNote, 3000);
+        setInterval(spawnFloatingNote, 7000);
 
         // Particles
         const particlesContainer = document.getElementById('particles');
@@ -324,6 +234,7 @@ function setupMusicToggle() {
                 const top = sec.offsetTop;
                 const h = sec.offsetHeight;
                 const id = sec.getAttribute('id');
+                if (!id) return;
                 if (scrollPos >= top && scrollPos < top + h) {
                     navLinks.forEach(l => {
                         l.classList.remove('active');
@@ -337,7 +248,6 @@ function setupMusicToggle() {
             hamburger.classList.toggle('active');
             mobileMenu.classList.toggle('active');
         });
-
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
@@ -345,19 +255,19 @@ function setupMusicToggle() {
             });
         });
 
-        // Scroll Animations
+        // Scroll animations
         const animEls = document.querySelectorAll('.animate-on-scroll');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((e, i) => {
                 if (e.isIntersecting) {
-                    setTimeout(() => e.target.classList.add('animated'), i * 80);
+                    setTimeout(() => e.target.classList.add('animated'), i * 60);
                     observer.unobserve(e.target);
                 }
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         animEls.forEach(el => observer.observe(el));
 
-        // Gallery Lightbox
+        // Polaroid lightbox
         const galleryItems = document.querySelectorAll('.gallery-item');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImage');
@@ -369,11 +279,8 @@ function setupMusicToggle() {
             images = [];
             galleryItems.forEach(item => {
                 const img = item.querySelector('img');
-                images.push({
-                    src: img.src,
-                    caption: item.querySelector('h4')?.textContent || '',
-                    date: item.querySelector('.overlay-content p')?.textContent || ''
-                });
+                const cap = item.querySelector('.polaroid-caption')?.textContent || '';
+                images.push({ src: img.src, caption: cap });
             });
         }
 
@@ -391,29 +298,15 @@ function setupMusicToggle() {
         function showLightbox(i) {
             if (images[i]) {
                 lightboxImg.src = images[i].src;
-                lightboxCap.textContent = `${images[i].caption} — ${images[i].date}`;
+                lightboxCap.textContent = images[i].caption;
             }
         }
 
         document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        document.getElementById('lightboxPrev').addEventListener('click', e => {
-            e.stopPropagation();
-            currentIdx = (currentIdx - 1 + images.length) % images.length;
-            showLightbox(currentIdx);
-        });
-        document.getElementById('lightboxNext').addEventListener('click', e => {
-            e.stopPropagation();
-            currentIdx = (currentIdx + 1) % images.length;
-            showLightbox(currentIdx);
-        });
-
+        function closeLightbox() { lightbox.classList.remove('active'); document.body.style.overflow = 'auto'; }
+        document.getElementById('lightboxPrev').addEventListener('click', e => { e.stopPropagation(); currentIdx = (currentIdx - 1 + images.length) % images.length; showLightbox(currentIdx); });
+        document.getElementById('lightboxNext').addEventListener('click', e => { e.stopPropagation(); currentIdx = (currentIdx + 1) % images.length; showLightbox(currentIdx); });
         document.addEventListener('keydown', e => {
             if (!lightbox.classList.contains('active')) return;
             if (e.key === 'ArrowLeft') document.getElementById('lightboxPrev').click();
@@ -421,7 +314,7 @@ function setupMusicToggle() {
             if (e.key === 'Escape') closeLightbox();
         });
 
-        // Letter Envelopes
+        // Love letter envelopes
         const letterEnvs = document.querySelectorAll('.letter-envelope');
         letterEnvs.forEach(env => {
             env.addEventListener('click', () => {
@@ -430,9 +323,16 @@ function setupMusicToggle() {
             });
         });
 
-        // Love Counter - March 3, 2025
-        const startDate = new Date('2025-03-03T00:00:00');
+        // OPEN WHEN envelopes
+        const owEnvelopes = document.querySelectorAll('.ow-envelope');
+        owEnvelopes.forEach(ow => {
+            ow.addEventListener('click', () => {
+                ow.classList.toggle('opened');
+            });
+        });
 
+        // Love counter (since)
+        const startDate = new Date('2025-03-03T00:00:00');
         function updateCounter() {
             const now = new Date();
             const diff = now - startDate;
@@ -440,7 +340,6 @@ function setupMusicToggle() {
             const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
             const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
             const seconds = Math.floor((diff % (1000*60)) / 1000);
-
             document.getElementById('counterDays').textContent = days;
             document.getElementById('counterHours').textContent = hours;
             document.getElementById('counterMinutes').textContent = minutes;
@@ -449,27 +348,33 @@ function setupMusicToggle() {
         updateCounter();
         setInterval(updateCounter, 1000);
 
-        // Music Toggle
-        const musicBtn = document.getElementById('musicToggle');
-        const music = document.getElementById('bgMusic');
-        let isPlaying = true;
-
-        musicBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                music.pause();
-                musicBtn.classList.remove('playing');
-                musicBtn.querySelector('i').className = 'fas fa-volume-mute';
-            } else {
-                music.play();
-                musicBtn.classList.add('playing');
-                musicBtn.querySelector('i').className = 'fas fa-music';
+        // NEXT ANNIVERSARY COUNTDOWN (03 March 2026)
+        const nextAnniversary = new Date('2026-03-03T00:00:00');
+        function updateCountdown() {
+            const now = new Date();
+            const diff = nextAnniversary - now;
+            if (diff <= 0) {
+                document.getElementById('cdDays').textContent = '0';
+                document.getElementById('cdHours').textContent = '0';
+                document.getElementById('cdMinutes').textContent = '0';
+                document.getElementById('cdSeconds').textContent = '0';
+                return;
             }
-            isPlaying = !isPlaying;
-        });
+            const days = Math.floor(diff / (1000*60*60*24));
+            const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+            const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+            const seconds = Math.floor((diff % (1000*60)) / 1000);
+            document.getElementById('cdDays').textContent = days;
+            document.getElementById('cdHours').textContent = hours;
+            document.getElementById('cdMinutes').textContent = minutes;
+            document.getElementById('cdSeconds').textContent = seconds;
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
 
         // Click heart effect
         document.addEventListener('click', e => {
-            if (e.target.closest('button') || e.target.closest('a')) return;
+            if (e.target.closest('button') || e.target.closest('a') || e.target.closest('.floating-note')) return;
             const heart = document.createElement('span');
             heart.textContent = '❤️';
             heart.style.cssText = `
