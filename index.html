@@ -17,13 +17,13 @@
             <h1 class="opening-title">A Little Something For You...</h1>
             <p class="opening-subtitle">Made with love by Thembi 💕</p>
 
-            <div class="big-envelope" id="bigEnvelope">
+            <div class="big-envelope" id="bigEnvelope" onclick="openEnvelope()" style="cursor: pointer; position: relative; z-index: 9999;">
                 <div class="big-envelope-back"></div>
                 <div class="big-envelope-letter" id="envelopeLetter">
                     <div class="letter-inside">
                         <p class="letter-inside-title">💌</p>
                         <p class="letter-inside-name">Katlego</p>
-                        <p class="letter-inside-text">Click me to open</p>
+                        <p class="letter-inside-text">Tap me to open</p>
                     </div>
                 </div>
                 <div class="big-envelope-front"></div>
@@ -33,7 +33,8 @@
                 </div>
             </div>
 
-            <p class="opening-hint" id="openingHint">👆 Click the envelope</p>
+            <p class="opening-hint" id="openingHint" style="margin-bottom: 15px;">👆 Tap the envelope to open</p>
+            <button class="cta-button" onclick="openEnvelope()" style="position: relative; z-index: 10000; padding: 12px 30px; font-size: 0.9rem;">Open Letter 💌</button>
         </div>
     </div>
 
@@ -73,8 +74,6 @@
     <div class="main-content" id="mainContent">
 
         <div class="floating-hearts" id="floatingHearts"></div>
-
-        <!-- Floating Love Notes Container -->
         <div class="floating-notes-container" id="floatingNotesContainer"></div>
 
         <!-- Navigation -->
@@ -687,7 +686,7 @@
                 </div>
 
                 <div class="promise-card animate-on-scroll">
-                    <div class="promise-icon">❤️‍🩹</div>
+                    <div class="promise-icon">❤️‍o</div>
                     <h3>I Promise To Say Sorry</h3>
                     <p>When I'm wrong, I'll say it. When I hurt you, I'll own it. My pride will never be bigger than my love for you. Ever.</p>
                 </div>
@@ -836,8 +835,8 @@
             <p class="footer-made">Made with all my love ❤️<br>— Thembi</p>
         </footer>
 
-        <!-- Background Music (auto-plays, no button) -->
-        <audio id="bgMusic" loop autoplay>
+        <!-- Background Music -->
+        <audio id="bgMusic" loop preload="auto">
             <source src="music/butterflies.mp3" type="audio/mpeg">
         </audio>
     </div>
